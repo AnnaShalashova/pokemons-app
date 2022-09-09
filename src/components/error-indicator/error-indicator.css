@@ -1,0 +1,12 @@
+.error-container {
+    margin: 70px;
+    display: flex;
+    justify-content: center;
+    
+    align-items: center;
+}
+
+.error-img {
+    width: 200px;
+    margin-right: 60px;
+}

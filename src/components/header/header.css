@@ -1,0 +1,21 @@
+.pokemon-logo {
+    width: 100px;
+
+    margin-left: 50px;
+    margin-right: 50px;
+    cursor: pointer;
+
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    font-size: large;
+}
+
+

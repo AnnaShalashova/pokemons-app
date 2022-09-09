@@ -1,0 +1,19 @@
+.home-header {
+    font-size: xx-large;
+}
+
+.home-body {
+    font-size: larger;
+}
+
+.home-page {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.home-img {
+    margin-top: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

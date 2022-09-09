@@ -1,0 +1,32 @@
+.pokemons-list  {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0px;
+    justify-content: space-around;
+}
+
+.li-pokemon {
+    border: 2px solid rgb(104, 214, 236);
+    margin: 4px;
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+    height: 170px;
+}
+
+.li-pokemon:hover {
+    border-color: rgb(47, 139, 155) !important;
+}
+
+.li-pokemon:hover .card-header {
+    color: rgb(239, 126, 126);
+}
+
+.spinner-items {
+    margin-left: 315px;
+    margin-top: 135px;
+}
+
+
+
+
