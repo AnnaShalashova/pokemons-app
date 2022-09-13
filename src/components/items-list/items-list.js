@@ -59,9 +59,11 @@ const Itemslist = ({getPokemon, searchText}) => {
     };
 
     return (
-        <ul className="pokemons-list">
-            {RenderPokemons(pokemonsList)}
-        </ul>            
+        <div className="pokemons-list-container">
+            <ul className="pokemons-list">
+                {RenderPokemons(pokemonsList)}
+            </ul>            
+        </div>
     )
 };
 

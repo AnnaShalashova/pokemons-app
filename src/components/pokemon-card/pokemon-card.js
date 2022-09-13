@@ -2,7 +2,7 @@ import React from "react"
 import { PokemonImage } from "../helpers/get-image";
 import "./pokemon-card.css"
 
-const PokemonCard = (id, pokemon, ability) => {
+const PokemonCard = (id, { pokemon, ability }) => {
 
     return (
         <div className="card-body">

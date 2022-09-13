@@ -9,8 +9,8 @@ import "./pokemon-details.css";
 const PokemonItem = ({id}) => {
     console.log("Rendering PokemonItem");
 
-    const [pokemon, setPokemon] = useState(null);
-    const [ability, setAbiity] = useState(null);
+    const defaultState = {};
+    const [pokemonState, setPokemonState] = useState(defaultState);
     const [status, setStatus] = useState({loading: true, error: false});
 
     const swapiService = new SwapiService();
@@ -32,13 +32,12 @@ const PokemonItem = ({id}) => {
             setStatus({loading: false, error: true});
         }
 
-        setPokemon(pokemon);
-        setAbiity(ability);
-        setStatus({loading: false, error: false});
+        setPokemonState({ pokemon, ability  });
+        setStatus({ loading: false, error: false });
     }
 
 
-    if (!pokemon || !ability) {
+    if (!pokemonState.pokemon || !pokemonState.ability) {
         return (
             <div className="pokemon-details-container"> 
                 
@@ -67,7 +66,7 @@ const PokemonItem = ({id}) => {
     return (
         <div className="pokemon-details-container pokemon-details card border-light mb-3">
             <div className="card-header">POKEMON CARD</div>
-            {PokemonCard(id, pokemon, ability)} 
+            {PokemonCard(id, pokemonState)} 
         </div>
     )
 }  
