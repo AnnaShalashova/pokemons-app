@@ -5,7 +5,6 @@ import PokemonItem from "../pokemon-details";
 import Itemslist from "../items-list";
 
 const PokemonsPage = () => {
-  console.log("POkemonsPage Rendering");
 
   const [pokemonId, setPokemonId] = useState(null);
   const [searchText, setSearchText] = useState("");

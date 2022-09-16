@@ -9,7 +9,6 @@ import ErrorIndicator from "../error-indicator/error-indicator";
 
 
 const Itemslist = ({getPokemon, searchText}) => {
-    console.log("ItemsList Rendering");
 
     const [pokemonsList, setPokemonsList] = useState([]);
     const [status, setStatus] = useState({loading: true, error: false});

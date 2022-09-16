@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo, useCallback} from "react";
+import React, {useState, useEffect} from "react";
 
 import SwapiService from "../../services";
 import PokemonCard from "../pokemon-card";
@@ -7,7 +7,6 @@ import ErrorIndicator from "../error-indicator";
 import "./pokemon-details.css";
 
 const PokemonItem = ({id}) => {
-    console.log("Rendering PokemonItem");
 
     const defaultState = {};
     const [pokemonState, setPokemonState] = useState(defaultState);
@@ -16,6 +15,7 @@ const PokemonItem = ({id}) => {
     const swapiService = new SwapiService();
 
     useEffect(() => {
+        setStatus({ loading: true, error: false });
         updatePokemon();
     }, [id]);
 
@@ -26,9 +26,8 @@ const PokemonItem = ({id}) => {
 
         const pokemon = await swapiService.getPokemon(id);
         const ability = await swapiService.getPokemonAbility(id);
-        console.log(pokemon);
+ 
         if (!pokemon|| !ability) {
-            console.log("error")
             setStatus({loading: false, error: true});
         }
 
@@ -53,9 +52,12 @@ const PokemonItem = ({id}) => {
 
     if (status.loading) {
         return (
+            <div className="pokemon-details-container pokemon-details card border-light mb-3">
+            <div className="card-header">POKEMON CARD</div>
             <div className="spinner-container">
                 <Spinner />
             </div>
+        </div>
         )
     }
 
@@ -63,6 +65,7 @@ const PokemonItem = ({id}) => {
         return <ErrorIndicator />
     }
 
+ 
     return (
         <div className="pokemon-details-container pokemon-details card border-light mb-3">
             <div className="card-header">POKEMON CARD</div>
