@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from "react";
-
+import React, {useState, useEffect, useMemo} from "react";
 
 import SwapiService from "../../services";
 import Spinner from "../spinner";
@@ -44,28 +43,29 @@ const Itemslist = ({getPokemon, searchText}) => {
             
         })
     };
-    
-    if (status.loading) {
-        return (
+
+    const renderSpinner = useMemo(() =>  (
         <div className="spinner-items">
             <Spinner />
         </div>
-        )
-    };
-
-    if (status.error) {
-        return <ErrorIndicator />
+        ), [])
+    
+    if (status.loading) {
+        return renderSpinner
     };
 
     return (
+        <>
+        {status.error && <ErrorIndicator />}
+        {!status.error && 
         <div className="pokemons-list-container">
             <ul className="pokemons-list">
                 {RenderPokemons(pokemonsList)}
             </ul>            
-        </div>
+        </div>}
+        </>
     )
 };
-
 
 export default React.memo(Itemslist);
 
