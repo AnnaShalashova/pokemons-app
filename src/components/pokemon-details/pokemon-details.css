@@ -13,7 +13,13 @@
 }
 
 .imgPikaLook {
-    width: 300px;   
+    margin-left: 70px;
+    margin-bottom: 20px  
+}
+
+.pokemon-details-text {
+    color: rgb(76, 97, 76);
+    text-align: center;
 }
 
 .bs-component {
@@ -28,6 +34,48 @@
 .spinner-container {
     margin-top: 120px;
     margin-left: 130px;
+}
+
+.pokemon-details-text {
+    font-size: x-large
+}
+
+.arrow-left span {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-bottom: 3px solid rgb(56, 78, 56);
+    border-left: 3px solid rgb(56, 78, 56);
+   
+    margin: -2px;
+    animation: arrow-left 1s infinite;
+    float: left;
+}
+ 
+.arrow-left span:nth-child(2){
+    animation-delay: -0.1s;
+}
+.arrow-left span:nth-child(3){
+    animation-delay: -0.2s;
+}
+@keyframes arrow-left {
+    0%{
+        opacity: 0;
+        transform: rotate(45deg) translate(-0px,-0px);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: rotate(45deg) translate(0px,0px);
+    }
+}
+
+.arrow-left {
+    position: relative;
+    right: 70px;
+    top: 208px;
 }
 
 

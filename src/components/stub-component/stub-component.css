@@ -1,0 +1,17 @@
+.stub-component-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    align-items: center;
+}
+
+.text {
+    font-size: large;
+}
+
+.text-container {
+    margin-left: 50px
+}
+
+
+

@@ -4,28 +4,28 @@ import SwapiService from "../../services";
 import Spinner from "../spinner";
 import "./items-list.css";
 import { PokemonImage } from "../helpers/get-image";
-import ErrorIndicator from "../error-indicator/error-indicator";
 
-
-const Itemslist = ({getPokemon, searchText}) => {
+const Itemslist = ({getPokemon, searchText, error, setError}) => {
 
     const [pokemonsList, setPokemonsList] = useState([]);
-    const [status, setStatus] = useState({loading: true, error: false});
+    const [loading, setLoading] = useState(true);
 
-    const swapiService = new SwapiService();
+    const swapiService = useMemo(() => new SwapiService(), []);
 
     useEffect(() => {
         swapiService.getAllPokemons()
         .then((pokemons) => {
             setPokemonsList(pokemons);
-            setStatus({loading: false, error: false})    
+            setLoading(false)  
         })
         .catch((error) => {
-            setStatus({loading: false, error})
+            setLoading(false); 
+            setError(true); 
+            throw new Error(error);        
         });
-    }, []);
+    }, [error, setError, swapiService]);
    
-    const RenderPokemons = (arr) => {
+    const renderPokemons = (arr) => {
        return arr.map((pokemon) => {
             const {name, url} = pokemon;
             let id = url.match(/\/(\d+)\/$/)[1];
@@ -48,21 +48,21 @@ const Itemslist = ({getPokemon, searchText}) => {
         <div className="spinner-items">
             <Spinner />
         </div>
-        ), [])
+    ), []);
     
-    if (status.loading) {
+    if (loading) {
         return renderSpinner
     };
 
     return (
         <>
-        {status.error && <ErrorIndicator />}
-        {!status.error && 
+        {/* {status.error && <ErrorIndicator resetPage={setReset(false)}/>} */}
+        {/* {!status.error &&  */}
         <div className="pokemons-list-container">
             <ul className="pokemons-list">
-                {RenderPokemons(pokemonsList)}
+                {renderPokemons(pokemonsList)}
             </ul>            
-        </div>}
+        </div>
         </>
     )
 };

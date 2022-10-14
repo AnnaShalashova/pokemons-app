@@ -4,7 +4,7 @@ const PokemonImage = (id) => {
     const _imgBase = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
     return (
-        <img alt="img-id" src={`${_imgBase}${id}.png`}></img>
+        <img alt={id} src={`${_imgBase}${id}.png`}></img>
     )
     
 }

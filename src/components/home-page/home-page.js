@@ -6,7 +6,7 @@ const HomePage = () => (
         <div className="home-page">
             <p className="home-header"> Welcome to Pokemon Home!</p>
             <p className="home-body">There is website where you can see all pokemons. Just click on "Pokemons" and you can choose any pokemon!</p>
-            <img className="home-img" alt="img-home" width="200px" 
+            <img className="home-img" alt="Happy pokemon" width="200px" 
                 src={homeImg}>
             </img>
         </div>

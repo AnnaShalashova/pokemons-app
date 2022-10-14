@@ -6,7 +6,7 @@ import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 import "./pokemon-details.css";
 
-const PokemonItem = ({id}) => {
+const PokemonDetails = ({id}) => {
 
     const defaultState = {};
     const [pokemonState, setPokemonState] = useState(defaultState);
@@ -38,13 +38,15 @@ const PokemonItem = ({id}) => {
 
     if (!pokemonState.pokemon || !pokemonState.ability) {
         return (
-            <div className="pokemon-details-container"> 
-                
-                <img className="imgPikaLook" alt="pika" src="https://avatanplus.com/files/resources/original/57eebd00a58cc1577c924aa6.png"></img>
-                <div className="bs-component">
-                    <div className="alert alert-dismissible alert-success">
-                    Choose your pokemon to see details!
-                    </div>
+            <div>
+                <div class="arrow-left">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div className="pokemon-details-container"> 
+                    <img className="imgPikaLook" width="250px" alt="Pikachu" src="https://avatanplus.com/files/resources/original/57eebd00a58cc1577c924aa6.png"></img>
+                    <p className="pokemon-details-text">Choose your pokemon to see details!</p>
                 </div>
             </div>
         )
@@ -75,6 +77,6 @@ const PokemonItem = ({id}) => {
 }  
 
 
-export default React.memo(PokemonItem);
+export default React.memo(PokemonDetails);
 
 
