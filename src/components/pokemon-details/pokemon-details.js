@@ -1,45 +1,27 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
+import { useSelector } from "react-redux";
+import { getPokemon } from "../../slices/pokemonSlice";
 
-import SwapiService from "../../services";
 import PokemonCard from "../pokemon-card";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 import "./pokemon-details.css";
 
-const PokemonDetails = ({id}) => {
-
-    const defaultState = {};
-    const [pokemonState, setPokemonState] = useState(defaultState);
-    const [status, setStatus] = useState({loading: true, error: false});
-
-    const swapiService = new SwapiService();
+const PokemonDetails = () => {
+    const pokemon = useSelector((state) => state.pokemon.pokemon);
+    const ability = useSelector((state) => state.pokemon.ability);
+    const loading = useSelector((state) => state.pokemon.loading);
+    const error = useSelector((state) => state.pokemon.error);
 
     useEffect(() => {
-        setStatus({ loading: true, error: false });
-        updatePokemon();
-    }, [id]);
-
-    const updatePokemon = async () => {
-        if (!id) {
-            return;
-        };
-
-        const pokemon = await swapiService.getPokemon(id);
-        const ability = await swapiService.getPokemonAbility(id);
- 
-        if (!pokemon|| !ability) {
-            setStatus({loading: false, error: true});
-        }
-
-        setPokemonState({ pokemon, ability  });
-        setStatus({ loading: false, error: false });
-    }
+        getPokemon();
+    }, [pokemon]);
 
 
-    if (!pokemonState.pokemon || !pokemonState.ability) {
+    if (!pokemon || !ability) {
         return (
             <div>
-                <div class="arrow-left">
+                <div className="arrow-left">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -52,7 +34,10 @@ const PokemonDetails = ({id}) => {
         )
     }
 
-    if (status.loading) {
+
+
+    if (loading.pokemon || loading.ability) {
+        
         return (
             <div className="pokemon-details-container pokemon-details card border-light mb-3">
             <div className="card-header">POKEMON CARD</div>
@@ -63,7 +48,7 @@ const PokemonDetails = ({id}) => {
         )
     }
 
-    if (status.error) {
+    if (error) {
         return <ErrorIndicator />
     }
 
@@ -71,7 +56,7 @@ const PokemonDetails = ({id}) => {
     return (
         <div className="pokemon-details-container pokemon-details card border-light mb-3">
             <div className="card-header">POKEMON CARD</div>
-            {PokemonCard(id, pokemonState)} 
+            <PokemonCard />
         </div>
     )
 }  

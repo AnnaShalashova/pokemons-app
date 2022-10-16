@@ -9,7 +9,6 @@ import HomePage from "../home-page";
 import PokemonsPage from "../pokemons-page";
 import StubComponent from "../stub-component"
 
-
 export default class App extends Component {
 
   render() {

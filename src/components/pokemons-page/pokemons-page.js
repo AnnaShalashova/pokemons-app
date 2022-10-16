@@ -1,33 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./pokemons-page.css";
 import PokemonDetails from "../pokemon-details";
 import Itemslist from "../items-list";
 import ErrorIndicator from "../error-indicator";
+import {setSearchText} from "../../slices/pokemonsSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const PokemonsPage = () => {
+  const errorPokemons = useSelector((state) => state.pokemons.error);
+  const searchText = useSelector((state) => state.pokemons.searchText);
+  const dispatch = useDispatch();
 
-  const [pokemonId, setPokemonId] = useState(null);
-  const [searchText, setSearchText] = useState("");
-  const [error, setError] = useState(false);
+  const changeSearchText = (e) => {
+    dispatch(setSearchText(e.target.value));
+  }
 
-  if (error) {
-    return <ErrorIndicator resetPage={() => setError(false)}/>
+  if (errorPokemons) {
+    return <ErrorIndicator />
   }
 
   return (
-    
-      <div className="pokemon-page">
-        <input className="search-pokemon form-control me-sm-2" type="text" 
-            placeholder="Search for Pokemon" value={searchText} 
-            onInput={(e) => setSearchText(e.target.value)}>
-          </input>
-        <div className="pokemons-page-container">
-          <Itemslist getPokemon={(id) => setPokemonId(id)}
-              setError={() => setError(true)} error searchText={searchText}/>
-          <PokemonDetails id={pokemonId}/>
-        </div>
+    <div className="pokemon-page">
+      <input className="search-pokemon form-control me-sm-2" type="text" 
+          placeholder="Search for Pokemon" value={searchText}
+          onInput={changeSearchText}>
+        </input>
+      <div className="pokemons-page-container">
+        <Itemslist />
+        <PokemonDetails />
       </div>
+    </div>
   )
 }
 

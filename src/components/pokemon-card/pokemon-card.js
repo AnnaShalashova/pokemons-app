@@ -1,8 +1,15 @@
 import React from "react"
 import { PokemonImage } from "../helpers/get-image";
+import { useSelector } from "react-redux";
 import "./pokemon-card.css"
 
-const PokemonCard = (id, { pokemon, ability }) => {
+const PokemonCard = () => {
+    const pokemon = useSelector((state) => state.pokemon.pokemon);
+    const pokemonId = useSelector((state) => state.pokemon.pokemonId);
+    const ability = useSelector((state) => state.pokemon.ability);
+   
+    const abilityName = ability.name;
+    const abilityDetails = ability.effect_entries[1].effect;
 
     return (
         <div className="card-body">
@@ -12,12 +19,12 @@ const PokemonCard = (id, { pokemon, ability }) => {
                     <div>HEIGHT: {pokemon.height}</div>
                     <div>WEIGHT: {pokemon.weight}</div>
                 </div>
-                {PokemonImage(id)}
+                {PokemonImage(pokemonId)}
             </div>
             
             <div className="ability">
-                <p>ABILITY: {ability.name}</p>
-                <p>{ability.effect_entries[1].effect}</p>
+                <p>ABILITY: {abilityName}</p>
+                <p>{abilityDetails}</p>
             </div>
         </div>
     )

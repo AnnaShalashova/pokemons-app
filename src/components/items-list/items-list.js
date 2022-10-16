@@ -1,29 +1,31 @@
-import React, {useState, useEffect, useMemo} from "react";
+import React, {useEffect, useMemo} from "react";
 
-import SwapiService from "../../services";
 import Spinner from "../spinner";
 import "./items-list.css";
 import { PokemonImage } from "../helpers/get-image";
+import { getPokemons } from "../../slices/pokemonsSlice";
+import { getPokemon, getPokemonAbility, setPokemonId} from "../../slices/pokemonSlice";
 
-const Itemslist = ({getPokemon, searchText, error, setError}) => {
+import { useSelector, useDispatch } from "react-redux";
 
-    const [pokemonsList, setPokemonsList] = useState([]);
-    const [loading, setLoading] = useState(true);
+const Itemslist = () => {
 
-    const swapiService = useMemo(() => new SwapiService(), []);
+    const loading = useSelector((state) => state.pokemons.loading);
+    const pokemonsList = useSelector((state) => state.pokemons.pokemons);
+    const searchText = useSelector((state) => state.pokemons.searchText)
+    const dispatch = useDispatch();
+    
 
     useEffect(() => {
-        swapiService.getAllPokemons()
-        .then((pokemons) => {
-            setPokemonsList(pokemons);
-            setLoading(false)  
-        })
-        .catch((error) => {
-            setLoading(false); 
-            setError(true); 
-            throw new Error(error);        
-        });
-    }, [error, setError, swapiService]);
+        dispatch(getPokemons());
+    }, []);
+
+    const getPokemonWithAbility = (id) => {
+        dispatch(getPokemon(id));
+        dispatch(getPokemonAbility(id));
+        dispatch(setPokemonId(id));
+    }
+
    
     const renderPokemons = (arr) => {
        return arr.map((pokemon) => {
@@ -34,7 +36,7 @@ const Itemslist = ({getPokemon, searchText, error, setError}) => {
             if (name.includes(searchText)) {
                 return (
                     <li className="li-pokemon card border-info mb-3"
-                        key={id} onClick={() => getPokemon(id)}>
+                        key={id} onClick={() => getPokemonWithAbility(id)}>
                             <div className="card-header">{name.toUpperCase()}</div>
                             <div className="card-body">{img}</div>
                     </li>
@@ -50,20 +52,21 @@ const Itemslist = ({getPokemon, searchText, error, setError}) => {
         </div>
     ), []);
     
+    
     if (loading) {
-        return renderSpinner
-    };
+        return  (
+        <div className="pokemons-list-container">
+            {renderSpinner}
+        </div>
+    )}
+        
 
     return (
-        <>
-        {/* {status.error && <ErrorIndicator resetPage={setReset(false)}/>} */}
-        {/* {!status.error &&  */}
         <div className="pokemons-list-container">
             <ul className="pokemons-list">
                 {renderPokemons(pokemonsList)}
             </ul>            
         </div>
-        </>
     )
 };
 
