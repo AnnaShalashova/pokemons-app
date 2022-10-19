@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 const PokemonsPage = () => {
   const errorPokemons = useSelector((state) => state.pokemons.error);
   const searchText = useSelector((state) => state.pokemons.searchText);
+  const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
 
   const changeSearchText = (e) => {
@@ -21,8 +22,8 @@ const PokemonsPage = () => {
   }
 
   return (
-    <div className="pokemon-page">
-      <input className="search-pokemon form-control me-sm-2" type="text" 
+    <div className={`pokemon-page pokemon-page-${theme}`}>
+      <input className={`search-pokemon form-control me-sm-2 search-pokemon-${theme}`} type="text" 
           placeholder="Search for Pokemon" value={searchText}
           onInput={changeSearchText}>
         </input>

@@ -54,6 +54,16 @@
     top: 40%;   
 }
 
+.pokemons-list-dark {
+    background-color: rgb(161, 161, 161);
+    border-color: rgb(57, 54, 54) !important;
+}
+
+.li-dark {
+    background-color: grey;
+    color: rgb(226, 225, 225);
+    border-color: rgb(57, 54, 54) !important;
+}
 
 
 

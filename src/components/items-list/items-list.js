@@ -13,6 +13,7 @@ const Itemslist = () => {
     const loading = useSelector((state) => state.pokemons.loading);
     const pokemonsList = useSelector((state) => state.pokemons.pokemons);
     const searchText = useSelector((state) => state.pokemons.searchText)
+    const theme = useSelector((state) => state.theme.theme);
     const dispatch = useDispatch();
     
 
@@ -35,7 +36,7 @@ const Itemslist = () => {
 
             if (name.includes(searchText)) {
                 return (
-                    <li className="li-pokemon card border-info mb-3"
+                    <li className={`li-pokemon card border-info mb-3 li-${theme}`}
                         key={id} onClick={() => getPokemonWithAbility(id)}>
                             <div className="card-header">{name.toUpperCase()}</div>
                             <div className="card-body">{img}</div>
@@ -62,7 +63,7 @@ const Itemslist = () => {
         
 
     return (
-        <div className="pokemons-list-container">
+        <div className={`pokemons-list-container pokemons-list-${theme}`}>
             <ul className="pokemons-list">
                 {renderPokemons(pokemonsList)}
             </ul>            

@@ -1,5 +1,6 @@
 .pokemon-page {
-    margin-top: 70px;
+    padding-top: 70px;
+    background-color: #d5f4e6;
 }
 
 .pokemons-page-container {
@@ -15,7 +16,6 @@
 }
 
 
-
 .pokemon-details .card-body {
     padding-bottom: 10px;
     overflow-y: scroll;
@@ -23,6 +23,13 @@
 
 .card-ditails {
     margin-left: 130px;
+}
 
-    
+.pokemon-page-dark {
+    background-color: rgb(41, 70, 139)
+}
+
+.search-pokemon-dark {
+    background-color: rgb(194, 194, 194);
+    border-color: rgb(57, 54, 54) !important;
 }

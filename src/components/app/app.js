@@ -8,27 +8,30 @@ import HistoryPage from "../history-page";
 import HomePage from "../home-page";
 import PokemonsPage from "../pokemons-page";
 import StubComponent from "../stub-component"
+import { useSelector } from "react-redux";
 
-export default class App extends Component {
+const App = () => {
 
-  render() {
+  const theme = useSelector((state) => state.theme.theme);
 
-    return (
-      <div>
-        <ErrorBoundry>
-          <BrowserRouter>
-            <Header />
-              <main>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="history" element={<HistoryPage />} />
-                <Route path="pokemons" element={<PokemonsPage />} />
-                <Route path="*" element={<StubComponent />} />
-              </Routes>
-              </main>
-          </BrowserRouter>
-        </ErrorBoundry>
-      </div>
-    )
-  } 
+  return (
+    <div className={`body-${theme}`}>
+      <ErrorBoundry>
+        <BrowserRouter>
+          <Header theme={theme}/>
+            <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="history" element={<HistoryPage theme={theme}/>} />
+              <Route path="pokemons" element={<PokemonsPage />} />
+              <Route path="*" element={<StubComponent />} />
+            </Routes>
+            </main>
+        </BrowserRouter>
+      </ErrorBoundry>
+    </div>
+  )
 }
+
+export default App;
+

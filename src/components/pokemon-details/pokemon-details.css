@@ -18,7 +18,6 @@
 }
 
 .pokemon-details-text {
-    color: rgb(76, 97, 76);
     text-align: center;
 }
 
@@ -76,6 +75,25 @@
     position: relative;
     right: 70px;
     top: 208px;
+}
+
+.text-dark {
+    color:rgb(171, 174, 171) !important;
+}
+
+.card-body-dark {
+    background-color: grey;
+    color: rgb(226, 225, 225);
+    border-color: rgb(57, 54, 54) !important;
+}
+
+.text-light {
+    color: rgb(76, 97, 76) !important;
+}
+
+.arrow-dark span {
+    border-bottom: 3px solid rgb(157, 192, 216);
+    border-left: 3px solid  rgb(157, 192, 216);
 }
 
 

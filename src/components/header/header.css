@@ -8,14 +8,30 @@
 }
 
 .header {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    margin-top: 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+    height: 80px;
 }
 
 .btn-primary {
     font-size: large;
 }
+
+.header-dark {
+    background-color: rgb(110, 108, 133) !important;
+}
+
+.mybtn-dark {
+    background-color: rgb(64, 63, 95) !important;
+    border:rgb(48, 46, 81)
+}
+
+
 
 

@@ -1,4 +1,9 @@
 .history {
     margin-top: 50px;
-    
+}
+
+.history-dark {
+    background-color: grey;
+    color: rgb(226, 225, 225);
+    border-color: rgb(57, 54, 54) !important;
 }

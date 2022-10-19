@@ -1,9 +1,9 @@
 import React from "react";
 import "./history-page.css"
 
-const HistoryPage = () => {
+const HistoryPage = ({theme}) => {
     return (
-        <div className="history card border-info mb-3">
+        <div className={`history card border-info mb-3 history-${theme}`}>
             <h1 className="card-header">Pokemon History</h1>
             <div className="card-body">
                 <p>
