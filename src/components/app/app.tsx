@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import "./app.css";
 import Header from "../header";
 import ErrorBoundry from "../error-boundry";
@@ -8,11 +7,10 @@ import HistoryPage from "../history-page";
 import HomePage from "../home-page";
 import PokemonsPage from "../pokemons-page";
 import StubComponent from "../stub-component"
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks"; 
 
-const App = () => {
-
-  const theme = useSelector((state) => state.theme.theme);
+const App: React.FC = () => {
+  const theme = useAppSelector((state) => state.theme.theme);
 
   return (
     <div className={`body-${theme}`}>

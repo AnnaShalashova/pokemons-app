@@ -1,11 +1,7 @@
-import React from "react";
-
 import img from "../images/18.webp";
 import "./stub-component.css";
 
 const StubComponent = () => {
-
-
     return (
         <div className="stub-component-container">
             <img className="stub-img" alt="Sad pokemon" width="200px" src={img} />

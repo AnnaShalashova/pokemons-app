@@ -1,11 +1,10 @@
-import React from "react";
 import errImg from "../images/18.webp";
-import { useDispatch } from "react-redux";
-import { setError } from "../../slices/pokemonsSlice";
+import { useAppDispatch } from "../hooks";
+import { setError } from "../../redux/pokemonsSlice";
 import "./error-indicator.css"
 
 const ErrorIndicator = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="error-container">

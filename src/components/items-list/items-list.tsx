@@ -1,34 +1,29 @@
 import React, {useEffect, useMemo} from "react";
-
 import Spinner from "../spinner";
 import "./items-list.css";
 import { PokemonImage } from "../helpers/get-image";
-import { getPokemons } from "../../slices/pokemonsSlice";
-import { getPokemon, getPokemonAbility, setPokemonId} from "../../slices/pokemonSlice";
-
-import { useSelector, useDispatch } from "react-redux";
+import { getPokemons } from "../../redux/pokemonsSlice";
+import { getPokemon, getPokemonAbility, setPokemonId} from "../../redux/pokemonSlice";
+import { useAppSelector, useAppDispatch } from "../hooks";
 
 const Itemslist = () => {
-
-    const loading = useSelector((state) => state.pokemons.loading);
-    const pokemonsList = useSelector((state) => state.pokemons.pokemons);
-    const searchText = useSelector((state) => state.pokemons.searchText)
-    const theme = useSelector((state) => state.theme.theme);
-    const dispatch = useDispatch();
-    
+    const loading = useAppSelector((state) => state.pokemons.loading);
+    const pokemonsList = useAppSelector((state) => state.pokemons.pokemons);
+    const searchText = useAppSelector((state) => state.pokemons.searchText)
+    const theme = useAppSelector((state) => state.theme.theme);
+    const dispatch = useAppDispatch();  
 
     useEffect(() => {
         dispatch(getPokemons());
     }, []);
 
-    const getPokemonWithAbility = (id) => {
+    const getPokemonWithAbility = (id: number) => {
         dispatch(getPokemon(id));
         dispatch(getPokemonAbility(id));
         dispatch(setPokemonId(id));
     }
-
    
-    const renderPokemons = (arr) => {
+    const renderPokemons = (arr: Array<any>) => {
        return arr.map((pokemon) => {
             const {name, url} = pokemon;
             let id = url.match(/\/(\d+)\/$/)[1];
@@ -42,8 +37,7 @@ const Itemslist = () => {
                             <div className="card-body">{img}</div>
                     </li>
                 )
-            }
-            
+            }    
         })
     };
 
@@ -53,14 +47,12 @@ const Itemslist = () => {
         </div>
     ), []);
     
-    
     if (loading) {
         return  (
         <div className="pokemons-list-container">
             {renderSpinner}
         </div>
-    )}
-        
+    )}    
 
     return (
         <div className={`pokemons-list-container pokemons-list-${theme}`}>

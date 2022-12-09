@@ -1,0 +1,19 @@
+.language-container {
+  position: absolute;
+  right: 30px;
+  border-radius: 5px;
+  background-color: #609b8a
+}
+
+.btn-lang {
+  margin: 0 !important;
+  margin-left: 3px !important;
+  margin-right: 3px !important;
+  margin-top: -2px !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+}
+
+.language-container-dark {
+  background-color: #3b3e3d
+}

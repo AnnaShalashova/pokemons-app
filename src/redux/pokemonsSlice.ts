@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from "axios";
 
-export const getPokemons = createAsyncThunk(
+export const getPokemons = createAsyncThunk<Array<any>>(
     'pokemons/fetchPokemons',
     async () => {
         const pokemons = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=100');
@@ -9,19 +10,26 @@ export const getPokemons = createAsyncThunk(
     }
 )
 
-const initialState = {
+export interface IPokemonsState {
+    pokemons: object[],
+    searchText: string,
+    loading: boolean,
+    error: null | object
+}
+
+const initialState: IPokemonsState = {
     pokemons: [],
     searchText: "",
     loading: true,
-    error: false
+    error: null
 };
 
 const pokemonsSlice = createSlice({
     name: "pokemons",
     initialState,
     reducers: {
-        setError: (state) => { state.error = false },
-        setSearchText: (state, action) => { 
+        setError: (state) => { state.error = null },
+        setSearchText: (state, action: PayloadAction<string>) => { 
             state.searchText = action.payload 
         }
     },
@@ -33,9 +41,8 @@ const pokemonsSlice = createSlice({
             })
             .addCase(getPokemons.rejected, (state, { error }) => {
                 state.error = error;
-                throw new Error("New error in getPokemons", error);
+                throw new Error(`New error in getPokemons, ${error}`);
             })
-            
     }
 
 })

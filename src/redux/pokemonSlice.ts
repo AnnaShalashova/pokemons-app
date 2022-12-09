@@ -1,7 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from "axios";
 
-export const getPokemon = createAsyncThunk(
+
+interface IPokemonState {
+    pokemon: any,
+    pokemonId: number | null,
+    ability: any,
+    loading: {
+        pokemon: boolean,
+        ability: boolean
+    },
+    error: null | object
+}
+
+export const getPokemon = createAsyncThunk<any, number>(
     'pokemon/fetchPokemon',
     async (id) => {
         const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -9,28 +22,28 @@ export const getPokemon = createAsyncThunk(
     }
 )
 
-export const getPokemonAbility = createAsyncThunk(
+export const getPokemonAbility = createAsyncThunk<any, number>(
     'pokemon/fetchPokemonAbility',
     async (id) => {
-        const pokemonAbility = await axios.get(`https://pokeapi.co/api/v2/ability/${id}`);
+        const pokemonAbility = await axios.get<object>(`https://pokeapi.co/api/v2/ability/${id}`);
         return pokemonAbility.data;
     }
 )
 
-const initialState = {
+const initialState: IPokemonState = {
     pokemon: null,
     pokemonId: null,
     ability: {},
-    loading: { pokemon: true, ability: true},
-    error: false
+    loading: {pokemon: true, ability: true},
+    error: null
 };
 
 const pokemonSlice = createSlice({
     name: "pokemon",
     initialState,
     reducers: {
-        setPokemonId: (state, { payload }) => {
-            state.pokemonId = payload;
+        setPokemonId: (state, action: PayloadAction<number>) => {
+            state.pokemonId = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -42,9 +55,9 @@ const pokemonSlice = createSlice({
             .addCase(getPokemon.pending, (state) => {
                 state.loading.pokemon = true;
             })
-            .addCase(getPokemon.rejected, (state, action) => {
-                state.error = action.error;
-                throw new Error("Error in getPokemon", action.error);
+            .addCase(getPokemon.rejected, (state, { error }) => {
+                state.error = error;
+                throw new Error(`Error in getPokemon, ${ error }`);
             })
             .addCase(getPokemonAbility.fulfilled, (state, { payload }) => {
                 state.ability = payload;
@@ -55,10 +68,9 @@ const pokemonSlice = createSlice({
             })
             .addCase(getPokemonAbility.rejected, (state, { error }) => {
                 state.error = error;
-                throw new Error("Error in getPokemonAbility", error);
+                throw new Error(`Error in getPokemonAbility, ${error}`);
             })
     }
-
 })
 
 export const { setPokemonId } = pokemonSlice.actions;
